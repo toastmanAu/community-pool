@@ -1,0 +1,19 @@
+{
+  "name": "@community-pool/core",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "gen-vectors": "tsx scripts/gen-vectors.ts"
+  },
+  "dependencies": {
+    "pool-smt": "file:../pool-smt/pkg"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
