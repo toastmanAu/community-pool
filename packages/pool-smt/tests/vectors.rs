@@ -35,7 +35,9 @@ fn load() -> Vec<Vector> {
 
 #[test]
 fn rust_reproduces_wasm_vectors() {
-    for v in load() {
+    let vectors = load();
+    assert!(!vectors.is_empty(), "no test vectors loaded — run `npm run gen-vectors`");
+    for v in vectors {
         let keys: Vec<String> = v.entries.iter().map(|e| e.lock_hash.clone()).collect();
         let bals: Vec<String> = v.entries.iter().map(|e| e.shannons.clone()).collect();
 

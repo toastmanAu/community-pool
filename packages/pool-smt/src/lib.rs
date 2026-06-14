@@ -1,6 +1,9 @@
 //! Community-pool accrual SMT: balance key->value root + Merkle proofs.
 //! Pure logic lives in `balance` and `smt`; this file is the wasm surface.
 
+// `balance` and `smt` are public API: the off-chain wasm surface (below) and the
+// future on-chain payout lock both consume these directly, and the native parity
+// test (tests/vectors.rs) reaches them via fully-qualified paths.
 pub mod balance;
 pub mod smt;
 
