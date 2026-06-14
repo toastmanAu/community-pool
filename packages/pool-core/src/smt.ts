@@ -13,18 +13,20 @@ export interface AccrualEntry {
   shannons: bigint
 }
 
-let ready = false
+let initPromise: Promise<void> | undefined
 
 /** Load the wasm module once. Call before any other export. */
 export async function initSmt(): Promise<void> {
-  if (!ready) {
-    const require = createRequire(import.meta.url)
-    const mainPath = require.resolve('pool-smt')           // .../pool_smt.js
-    const wasmPath = new URL('pool_smt_bg.wasm', `file://${mainPath}`)
-    const bytes = await readFile(wasmPath)
-    await init({ module_or_path: bytes })
-    ready = true
+  if (!initPromise) {
+    initPromise = (async () => {
+      const require = createRequire(import.meta.url)
+      const mainPath = require.resolve('pool-smt')
+      const wasmPath = new URL('pool_smt_bg.wasm', `file://${mainPath}`)
+      const bytes = await readFile(wasmPath)
+      await init({ module_or_path: bytes })
+    })()
   }
+  return initPromise
 }
 
 function split(entries: AccrualEntry[]): { keys: string[]; balances: string[] } {
