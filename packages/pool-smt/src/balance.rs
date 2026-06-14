@@ -72,4 +72,20 @@ mod tests {
     fn parse_key_rejects_wrong_length() {
         assert!(parse_key("0x1234").is_err());
     }
+
+    #[test]
+    fn parse_balance_parses_decimal_string() {
+        assert_eq!(parse_balance("100000000").unwrap(), BalanceValue(100_000_000));
+    }
+
+    #[test]
+    fn parse_balance_rejects_overflow() {
+        // u64::MAX + 1
+        assert!(parse_balance("18446744073709551616").is_err());
+    }
+
+    #[test]
+    fn parse_balance_rejects_non_numeric() {
+        assert!(parse_balance("not a number").is_err());
+    }
 }
