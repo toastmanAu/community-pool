@@ -1,5 +1,7 @@
 import { describe, it, expect, beforeAll } from 'vitest'
 import { initSmt, accrualRoot, genProof, verifyProof } from '../src/smt.js'
+import { readFileSync } from 'node:fs'
+const vectors = JSON.parse(readFileSync(new URL('./vectors/smt-vectors.json', import.meta.url), 'utf8'))
 
 const k = (b: number) =>
   '0x' + b.toString(16).padStart(2, '0').repeat(32)
@@ -45,4 +47,23 @@ describe('pool-smt TS wrapper', () => {
     const proof = genProof(entries, [k(2)])
     expect(verifyProof(root, proof, [{ lockHash: k(2), shannons: 999n }])).toBe(false)
   })
+})
+
+describe('canonical vectors', () => {
+  for (const v of vectors as any[]) {
+    it(`root matches for "${v.name}"`, () => {
+      const entries = v.entries.map((e: any) => ({
+        lockHash: e.lockHash,
+        shannons: BigInt(e.shannons),
+      }))
+      expect(accrualRoot(entries)).toBe(v.root)
+    })
+
+    it(`proof verifies for "${v.name}"`, () => {
+      const ok = verifyProof(v.root, v.compiledProof, [
+        { lockHash: v.proofKey, shannons: BigInt(v.proofBalance) },
+      ])
+      expect(ok).toBe(true)
+    })
+  }
 })
