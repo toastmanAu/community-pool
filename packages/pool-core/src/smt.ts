@@ -46,6 +46,12 @@ export function genProof(entries: AccrualEntry[], proofKeys: string[]): string {
   return gen_proof(keys, balances, proofKeys)
 }
 
+/**
+ * Verify that `leaves` belong to the SMT `root` according to `compiledProof`.
+ *
+ * @throws Throws if the wasm layer rejects malformed input (e.g. non-hex proof,
+ *   length mismatch); callers handling untrusted input should wrap in try/catch.
+ */
 export function verifyProof(
   root: string,
   compiledProof: string,

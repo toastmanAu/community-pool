@@ -12,6 +12,9 @@ use crate::balance::{parse_balance, parse_key, BalanceValue};
 /// CKB-personalized blake2b (32-byte digest, personalization "ckb-default-hash").
 /// blake2b_simd produces byte-identical output to the on-chain C hasher, which is
 /// what makes off-chain (wasm) and on-chain (RISC-V) roots/proofs match.
+/// NOTE: this hasher uses `blake2b_simd` (std-only). An on-chain (no_std/ckb-std) consumer
+/// MUST re-implement an equivalent `Hasher` using ckb-std's blake2b with the same
+/// "ckb-default-hash" personalization — do not import this struct into a no_std lock crate.
 pub struct Blake2bHasher(State);
 
 fn ckb_blake2b_params() -> Params {

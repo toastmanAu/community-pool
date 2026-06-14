@@ -22,7 +22,7 @@ async function main() {
       entries: [
         { lockHash: k(1), shannons: 100_000_000n },
         { lockHash: k(2), shannons: 250_000_000n },
-        { lockHash: k(3), shannons: 61_000_000_00n },
+        { lockHash: k(3), shannons: 6_100_000_000n },
       ],
       proofKey: k(2),
     },

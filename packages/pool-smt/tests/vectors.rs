@@ -52,5 +52,13 @@ fn rust_reproduces_wasm_vectors() {
         )
         .unwrap();
         assert!(ok, "proof failed to verify for {}", v.name);
+
+        let rust_proof =
+            pool_smt::smt::gen_proof_inner(&keys, &bals, &[v.proof_key.clone()]).unwrap();
+        assert_eq!(
+            rust_proof, v.compiled_proof,
+            "compiled-proof bytes mismatch (Rust vs wasm) for {}",
+            v.name
+        );
     }
 }
