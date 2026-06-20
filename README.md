@@ -8,7 +8,7 @@ A **federated, non-custodial PPLNS mining pool for CKB** (Eaglesong PoW). Commun
 
 ## Why this exists
 
-Solo mining CKB at community hashrate (~60 TH/s against a ~100 PH/s network) means a block roughly every 5 months — unworkable variance. Existing pool software (yiimp) is single-operator PHP/MySQL with no Eaglesong path and a custodial trust model. This project instead **extends the proven [`ckb-stratum-proxy`](https://github.com/toastmanAu)** (Eaglesong, K7/GodMiner wire format, vardiff, dashboard) and adds three things on top:
+Solo mining CKB at community hashrate (~60 TH/s against a ~100 PH/s network) means a block roughly every **4–5 hours on average — but with brutal Poisson variance**: you can easily go a full day with nothing, then catch two in an hour. Pooling smooths that bursty income into a steady cadence. Existing pool software (yiimp) is single-operator PHP/MySQL with no Eaglesong path and a custodial trust model. This project instead **extends the proven [`ckb-stratum-proxy`](https://github.com/toastmanAu)** (Eaglesong, K7/GodMiner wire format, vardiff, dashboard) and adds three things on top:
 
 1. **Share accounting** — difficulty-weighted PPLNS over signed, sequence-numbered share batches.
 2. **A custom on-chain payout lock** — funds move only against an `M`-of-`N` operator signature *and* a set of immutable rules the signatures cannot override.

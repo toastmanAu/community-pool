@@ -167,7 +167,9 @@ block matures (~16h)
 
 ## 7. Economics reality (value prop honesty)
 
-At community scale (~60 TH/s) vs a ~100 PH/s network, a solo block is ~5 months out; pooling ~10 K7s (~600 TH) is ~once every ~2 weeks. The pool's value is **pooled variance + localized low-latency getwork + a fair, auditable on-chain split** — not steady daily income. PPLNS + non-custodial requires no capital buffer, which is exactly why PPS was rejected.
+Expected time to a block ≈ `(network_hashrate / your_hashrate) × block_interval`. Against a ~100 PH/s network with ~8–12s blocks: a single K7 (~67 TH/s, ~0.067% of net) finds a block roughly **every 3–5 hours on average**, and ~10 K7s (~600 TH/s, ~0.6%) roughly **every 20–35 minutes**. (Cross-check: a single K7 ≈ ~0.2–0.3 blocks/hour, matching the observed "~30%/hour" find rate.) These are *means* over a high-variance Poisson process — solo income is bursty (a full dry day is common), and the figures scale directly with the live network hashrate. The pool's value is therefore **variance smoothing + localized low-latency getwork + a fair, auditable on-chain split** — turning bursty solo luck into steady payouts, not conjuring income that wasn't there. PPLNS + non-custodial requires no capital buffer, which is exactly why PPS was rejected.
+
+> **Correction (2026-06-21):** an earlier draft of this paragraph claimed "solo ~5 months, pool ~2 weeks." That was wrong by ~1000× — those figures imply a ~65–97 EH/s (Bitcoin-scale) network, not CKB's ~100 PH/s. The corrected hours/minutes figures above are self-consistent with the K7 "~30%/hour" find rate. The non-custodial PPLNS design is unchanged; only the variance framing is corrected.
 
 ---
 
