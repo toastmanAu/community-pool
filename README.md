@@ -16,6 +16,8 @@ Solo mining CKB at community hashrate (~60 TH/s against a ~100 PH/s network) mea
 
 The value proposition is honest: **pooled variance + low-latency localized getwork + a fair, auditable on-chain split** — not steady daily income. Because payouts are PPLNS and non-custodial, the pool needs **no capital buffer**, which is exactly why PPS was rejected.
 
+> **Plug in the live network hashrate.** Every time-to-block figure above assumes a ~100 PH/s network and ~8–12s blocks. Expected time to a block scales linearly with network hashrate: `mean ≈ (network_hashrate / your_hashrate) × block_interval`. Check the current value (e.g. an explorer's "Difficulty / Hash Rate" stat) before quoting numbers — at ~300 PH/s, 60 TH/s is ~half a day rather than ~4–5 hours. The figures move with the network; they never approach months at any plausible CKB hashrate.
+
 ---
 
 ## Architecture
